@@ -1,13 +1,13 @@
 import express from 'express'
-import { userController } from './bootstrap';
+import { validatorController } from './bootstrap';
 import { saveFilePathMiddleware, uploadFile } from '../middleware/upload';
-import { ReadingFileBi } from '../middleware/validateBI';
 import { ReadingFile } from '../middleware/ValidateProfTranser';
+import { ReadingAndExtractDataFromImage } from '../middleware/BiProcessFile';
 
 const userRoutes = express.Router();
 
-userRoutes.post('/save', uploadFile, saveFilePathMiddleware,ReadingFileBi,userController.create);
 
-userRoutes.post('/profbank/save', uploadFile,saveFilePathMiddleware,ReadingFile,userController.loadIban);
+userRoutes.post('/profbank/save', uploadFile,saveFilePathMiddleware,ReadingFile,validatorController.validateBankReceipt);
+userRoutes.post('/bidoc/save', uploadFile,saveFilePathMiddleware,ReadingAndExtractDataFromImage,validatorController.validateBiDoc);
 
 export default userRoutes;

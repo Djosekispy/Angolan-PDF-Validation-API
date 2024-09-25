@@ -1,13 +1,19 @@
 
 # API de Validação de PDFs para o Sistema Angolano
 
-Esta API está sendo desenvolvida para validar documentos em formato PDF, com foco em documentos amplamente utilizados no sistema angolano, como **Bilhetes de Identidade (BI)**, **comprovativos de transferências bancárias**, e outros documentos administrativos. O projeto encontra-se em fase de desenvolvimento, e atualmente apenas a funcionalidade de validação de comprovativos de transferências bancárias está operativa.
+Esta API está sendo desenvolvida para validar documentos em formato PDF normal e com conteudo scaneado, com foco em documentos amplamente utilizados no sistema angolano, como **Bilhetes de Identidade (BI)**, **comprovativos de transferências bancárias**, e outros documentos administrativos. O projeto encontra-se em fase de desenvolvimento, e atualmente apenas a funcionalidade de validação de comprovativos de transferências bancárias está operativa.
 
 ## Funcionalidades
 
 - **Validação de Comprovativos de Transferência Bancária**: 
   - Extrai dados essenciais de PDFs, como código da transação, montante, IBAN, data e destinatário.
   - Valida o formato do IBAN angolano, a data da transação e a unicidade do código de transação para evitar fraudes ou duplicações.
+
+- **Validação de Bilhete de Identidade**: 
+   - Ao tentar salvar um novo usuário, o sistema primeiro verifica se já existe um usuário com o mesmo número de BI (campo cardNumber).
+   - Caso já exista um usuário com esse número de BI, o sistema rejeita a criação do novo usuário, prevenindo duplicação de dados.
+   - O sistema também verifica se o BI está expirado, comparando a data de expiração (expiryDate) com a data atual.
+   - Se o BI estiver expirado, o usuário não é salvo, garantindo que apenas usuários com documentos válidos sejam registrados.
 
 ### Uso da API GPT-4 Turbo
 
@@ -26,11 +32,15 @@ A API utiliza a **GPT-4 Turbo** para realizar a extração e estruturação dos 
 - **JSON File**: Guarda os dados em arquivos para busca ( simulando um banco de dados).
 - **PDF-Parse**: Biblioteca usada para extrair o texto dos PDFs.
 - **GPT-4 Turbo**: Usada para processar e estruturar os dados extraídos dos PDFs.
+- **Tesseract.js** : Biblioteca usada para extrair dados da imagem
 
 ## Endpoints da API
 
 - **POST /profbank/save**:
   Valida os dados de um comprovativo de transferência bancária. A API faz o parsing do PDF, extrai e estrutura os dados usando a GPT-4 Turbo e valida campos como o código da transação, o formato do IBAN e a validade da data.
+
+- **POST /bidoc/save**:
+    Valida os dados de um Bilhete de identidade em formato de imagem. A API faz o reconhecimento do arquivo, extrai os dados usando o Tesseract.js  e estrutura os dados usando a GPT-4 Turbo, a aplicação é responsavél por toda lógica de validação.
 
 ## Começando
 
@@ -79,6 +89,7 @@ Para contribuir:
 - **Validação do Bilhete de Identidade (BI)**: Em desenvolvimento.
 - **Validação de Outros Documentos**: Expansão para faturas de serviços, contratos, e outros documentos relevantes.
 - **Suporte a OCR**: Planejado para PDFs baseados em imagem.
+- **Converter arquivos scaneados em imagem** : para facilitar a extração de dados 
   
 ## Licença
 

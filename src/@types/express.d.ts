@@ -5,7 +5,8 @@ import { FileValidatorBiDTO } from '../middleware/validateBI';
 export interface customRequest extends Request{
     downloadURL?: string;
     fileData?: FileValidatorDTO;
-    fileBiData? : FileValidatorBiDTO
+    fileBiData? : FileValidatorBiDTO;
+    gptResponse ? : FileValidatorDTOBI
   
 }
 

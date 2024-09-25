@@ -1,5 +1,6 @@
-import UserController from "../controllers/UserCoNtroller";
+import ValidatorController from "../controllers/ValidatorController";
+import { validatorService } from "../service";
 
-const userController = new UserController();
+const validatorController = new ValidatorController(validatorService);
 
-export { userController }
+export { validatorController }

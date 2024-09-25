@@ -7,7 +7,6 @@ const stub = ClarifaiStub.grpc();
 
 
 
-// Função que retorna a saída do modelo
 export function getModelOutput(RAW_TEXT) {
     return new Promise((resolve, reject) => {
         const metadata = new grpc.Metadata();

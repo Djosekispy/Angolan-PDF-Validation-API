@@ -1,8 +1,9 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
-
+import { faker } from '@faker-js/faker';
 
 interface ITrasaction {
+    id ? : string;
     transactionCode : number;
     datetime: string;
     type: string;
@@ -11,7 +12,8 @@ interface ITrasaction {
     amount: number;
 }
 
-export default class Transaction {
+class Transaction {
+    private id ? : string
     private datetime: string;
     private type: string;
     private destination: string;
@@ -19,7 +21,7 @@ export default class Transaction {
     private amount: number;
     private transactionCode: number;
 
-    constructor(datetime: string, destination: string, type: string, iban: string,amount:number,transactionCode:number) {
+    constructor({datetime, destination, type, iban,amount,transactionCode} : ITrasaction) {
         this.datetime = datetime;
         this.destination = destination;
         this.iban = iban;
@@ -28,7 +30,7 @@ export default class Transaction {
         this.transactionCode = transactionCode;
     }
 
-    save(): ITrasaction[] | { error: string } {
+    save(): ITrasaction | { error: string } {
         try {
             const transactionFilePath = path.join(__dirname, '../db/transaction.json');
 
@@ -44,6 +46,7 @@ export default class Transaction {
             let ConvertJson: ITrasaction[] = [];
 
             const newDate: ITrasaction = {
+                id : faker.string.uuid(),
                 datetime: this.datetime,
                 destination: this.destination,
                 iban: this.iban,
@@ -62,7 +65,7 @@ export default class Transaction {
 
             writeFileSync(transactionFilePath, JSON.stringify(ConvertJson));
 
-            return this.gettransaction();
+            return newDate;
         } catch (error) {
             return { error: (error as Error).message };
         }
@@ -125,3 +128,5 @@ export default class Transaction {
     }
   
 }
+
+export { ITrasaction, Transaction}
