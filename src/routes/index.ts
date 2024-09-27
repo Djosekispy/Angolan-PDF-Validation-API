@@ -42,7 +42,7 @@ const userRoutes = express.Router();
  *                     properties:
  *                       id:
  *                         type: string
- *                         example: "64220965-9eb6-4b3e-96b7-7b59becee897"
+ *                         example: "xxxxxxxxxxxxxxxxxxxx"
  *                       datetime:
  *                         type: string
  *                         example: "xxxx-xx-xx xx:xx:xx"
@@ -134,7 +134,7 @@ userRoutes.post('/profbank/save', uploadFile, saveFilePathMiddleware, ReadingFil
  *                           example: "xxxxxxxx"
  *                         height:
  *                           type: string
- *                           example: "175"
+ *                           example: "xxx"
  *                         maritalStatus:
  *                           type: string
  *                           example: "xxxxxxxxx"

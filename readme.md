@@ -84,12 +84,18 @@ Para contribuir:
 2. Crie uma nova branch com sua feature/correção.
 3. Envie um pull request explicando suas alterações.
 
+
+## Documentação da API
+
+Acesse a documentação oficial da API, incluindo exemplos detalhados de como utilizar os diferentes endpoints, através do seguinte link: http://localhost:3000/api-docs/. Essa página fornece recursos interativos que facilitam a exploração dos endpoints disponíveis e como utilizá-los corretamente em suas requisições.
+
+
 ## Roteiro de Desenvolvimento
 
 - **Validação do Bilhete de Identidade (BI)**: Em desenvolvimento.
 - **Validação de Outros Documentos**: Expansão para faturas de serviços, contratos, e outros documentos relevantes.
-- **Suporte a OCR**: Planejado para PDFs baseados em imagem.
-- **Converter arquivos scaneados em imagem** : para facilitar a extração de dados 
+- **Suporte a OCR**: Planejado para PDFs baseados em imagem (Já implementado).
+- **Converter arquivos scaneados em imagem** : para facilitar a extração de dados ( já implementado)
   
 ## Licença
 
