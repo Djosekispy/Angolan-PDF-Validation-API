@@ -40,7 +40,7 @@ A API utiliza a **GPT-4 Turbo** para realizar a extração e estruturação dos 
   Valida os dados de um comprovativo de transferência bancária. A API faz o parsing do PDF, extrai e estrutura os dados usando a GPT-4 Turbo e valida campos como o código da transação, o formato do IBAN e a validade da data.
 
 - **POST /bidoc/save**:
-    Valida os dados de um Bilhete de identidade em formato de imagem. A API faz o reconhecimento do arquivo, extrai os dados usando o Tesseract.js  e estrutura os dados usando a GPT-4 Turbo, a aplicação é responsavél por toda lógica de validação.
+    Valida os dados de um Bilhete de identidade. Converte o documento scaneado em pdf em imagem png. A API faz o reconhecimento do arquivo, extrai os dados usando o Tesseract.js  e estrutura os dados usando a GPT-4 Turbo, a aplicação é responsavél por toda lógica de validação.
 
 ## Começando
 
