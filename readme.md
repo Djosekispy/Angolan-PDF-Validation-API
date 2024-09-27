@@ -1,7 +1,7 @@
 
 # API de Validação de PDFs para o Sistema Angolano
 
-Esta API está sendo desenvolvida para validar documentos em formato PDF normal e com conteudo scaneado, com foco em documentos amplamente utilizados no sistema angolano, como **Bilhetes de Identidade (BI)**, **comprovativos de transferências bancárias**, e outros documentos administrativos. O projeto encontra-se em fase de desenvolvimento, e atualmente apenas a funcionalidade de validação de comprovativos de transferências bancárias está operativa.
+Esta API está sendo desenvolvida para validar documentos em formato PDF normal e com conteudo scaneado, com foco em documentos amplamente utilizados no sistema angolano, como **Bilhetes de Identidade (BI)**, **comprovativos de transferências bancárias**, e outros documentos administrativos. O projeto encontra-se em fase de desenvolvimento.
 
 ## Funcionalidades
 
