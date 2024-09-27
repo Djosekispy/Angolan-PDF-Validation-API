@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { getModelOutput } from "../provider/aptApi";
 import { customRequest } from "../@types/express";
 import Tesseract from "tesseract.js";
+import path from "path";
+import convertPdfToImages from "../utils/pdftoImage";
+import { getModelOutput } from "../utils/aptApi";
 
 type FileValidatorDTOBI = {
   country: string;
@@ -23,11 +25,19 @@ type FileValidatorDTOBI = {
 };
 
 async function ReadingAndExtractDataFromImage(req: customRequest, res: Response, next: NextFunction) {
-  const url = req.downloadURL as string;
+  let url = req.downloadURL as string;
 
   try {
     if (!url || typeof url !== 'string') {
       return res.status(400).json({ message: 'Invalid file URL' });
+    }
+
+    const fileExtension = path.extname(url).toLowerCase();
+
+    if (fileExtension === '.pdf') {
+      const outputDir = 'src/public/output_images';
+      const pdfFilePath = url; 
+      [url] = await convertPdfToImages(pdfFilePath, outputDir); 
     }
 
     const { data: { text } } = await Tesseract.recognize(
@@ -68,7 +78,6 @@ async function ReadingAndExtractDataFromImage(req: customRequest, res: Response,
     next();
 
   } catch (err) {
-    console.error('Error processing the image or GPT response:', err);
     return res.status(500).json({ message: 'An error occurred', error: err });
   }
 }

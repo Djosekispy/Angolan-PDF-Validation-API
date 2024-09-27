@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import axios from "axios";
 import pdfParse from "pdf-parse";
-import { getModelOutput } from "../provider/aptApi";
+import { getModelOutput } from "../utils/aptApi";
 import { customRequest } from "../@types/express";
 import { readFileSync } from "fs";
 
