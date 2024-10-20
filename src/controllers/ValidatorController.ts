@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import { customRequest } from "../@types/express";
 import ValidatorInterface from "../interface/ValidatorInterface";
-import { FileValidatorDTO } from "../middleware/ValidateProfTranser";
 import { FileValidatorDTOBI } from "../middleware/BiProcessFile";
-import { FileNifValidatorDTO } from "../middleware/ValidateNif";
+import { ExtractFile } from "../utils/extractdata";
 
 
 class ValidatorController {
@@ -29,7 +28,8 @@ class ValidatorController {
     
 
     validateBankReceipt = async (req: customRequest, res: Response) => {
-            const { datetime,transactionType,receiver ,iban,amount,total,transactionNumber} = req.fileData as FileValidatorDTO;
+            const question = `Neste conteúdo, quero que extraia a data - hora como datetime, operação como transactionType, destinatário como receiver, IBAN como iban, montante como amount, total como total e transação como transactionNumber. Retorne apenas o resultado em código JSON`;
+            const { datetime,transactionType,receiver ,iban,amount,total,transactionNumber} = await ExtractFile(req.downloadURL as string,question);
             const register = await this.validatorService.validateBankReceipt({datetime,transactionType,receiver ,iban,amount,total,transactionNumber})
             if('error' in register){
                 return res.status(500).json({ message : register.error})
@@ -38,8 +38,8 @@ class ValidatorController {
     }
 
     validateNif = async (req: customRequest, res: Response) => {
-      const { name, nif} = req.fileDataNif as FileNifValidatorDTO;
-      
+      const question = `Neste conteúdo, quero que extraia a nome como name, e Número de Identificação como nif. Retorne apenas o resultado em código JSON`;
+      const { name, nif} = await ExtractFile(req.downloadURL as string,question);
       return res.status(200).json({message : ' Arquivo validado com sucesso', data : {name,nif}})
 }
     

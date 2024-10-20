@@ -1,7 +1,6 @@
 import { FileValidatorDTOBI } from "../middleware/BiProcessFile";
-import { FileNifValidatorDTO } from "../middleware/ValidateNif";
-import { FileValidatorDTO } from "../middleware/ValidateProfTranser";
 import { ITrasaction } from "../Model/Transaction";
+import { FileValidatorDTO } from "./ibanDTO";
 
 
 interface ValidatorInterface {

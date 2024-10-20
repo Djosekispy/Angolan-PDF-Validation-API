@@ -1,9 +1,7 @@
 import express from 'express';
 import { saveFilePathMiddleware, uploadFile } from '../middleware/upload';
-import { ReadingFile } from '../middleware/ValidateProfTranser';
 import { ReadingAndExtractDataFromImage } from '../middleware/BiProcessFile';
 import { validatorController } from './bootstrap';
-import { ReadingFileNif } from '../middleware/ValidateNif';
 
 const userRoutes = express.Router();
 
@@ -66,7 +64,7 @@ const userRoutes = express.Router();
  *         description: Erro interno do servidor
  */
 
-userRoutes.post('/profbank/save', uploadFile, saveFilePathMiddleware, ReadingFile, validatorController.validateBankReceipt);
+userRoutes.post('/profbank/save', uploadFile, saveFilePathMiddleware,validatorController.validateBankReceipt);
 
 /**
  * @swagger
@@ -194,7 +192,7 @@ userRoutes.post('/bidoc/save', uploadFile, saveFilePathMiddleware, ReadingAndExt
  *         description: Erro interno do servidor
  */
 
-userRoutes.post('/nif/show', uploadFile, saveFilePathMiddleware, ReadingFileNif, validatorController.validateNif);
+userRoutes.post('/nif/show', uploadFile, saveFilePathMiddleware,validatorController.validateNif);
 
 
 export default userRoutes;
