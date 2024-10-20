@@ -152,7 +152,49 @@ userRoutes.post('/profbank/save', uploadFile, saveFilePathMiddleware, ReadingFil
 userRoutes.post('/bidoc/save', uploadFile, saveFilePathMiddleware, ReadingAndExtractDataFromImage, validatorController.validateBiDoc);
 
 
+/**
+ * @swagger
+ * /nif/show:
+ *   post:
+ *     summary: Valida um documento de NIF
+ *     description: Faz upload de um arquivo de NIF e extrai os dados utilizando OCR.
+ *     tags:
+ *       - NIF
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Documento NIF validado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Arquivo validado com sucesso"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       example: "XXXXXXXXXXX"
+ *                     nif:
+ *                       type: string
+ *                       example: "XXXXXXXXXXXX"
+ *       400:
+ *         description: Erro interno do servidor
+ */
 
 userRoutes.post('/nif/show', uploadFile, saveFilePathMiddleware, ReadingFileNif, validatorController.validateNif);
+
 
 export default userRoutes;
