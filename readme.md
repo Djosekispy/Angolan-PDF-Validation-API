@@ -15,6 +15,11 @@ Esta API está sendo desenvolvida para validar documentos em formato PDF normal 
    - O sistema também verifica se o BI está expirado, comparando a data de expiração (expiryDate) com a data atual.
    - Se o BI estiver expirado, o usuário não é salvo, garantindo que apenas usuários com documentos válidos sejam registrados.
 
+- **Validação de NIF**:
+   - Carrega um arquivo contém o número de contribuiente
+   - Extrai os dados e retorna eles de forma estruturada
+   - Aceita apenas documento não scaneado ( Foi testado com documentos gerado pelo SEPE )
+
 ### Uso da API GPT-4 Turbo
 
 A API utiliza a **GPT-4 Turbo** para realizar a extração e estruturação dos dados dos documentos PDF. A GPT-4 Turbo é responsável por interpretar o conteúdo dos documentos e retornar informações organizadas no formato JSON, facilitando a validação dos dados.
@@ -41,6 +46,9 @@ A API utiliza a **GPT-4 Turbo** para realizar a extração e estruturação dos 
 
 - **POST /bidoc/save**:
     Valida os dados de um Bilhete de identidade. Converte o documento scaneado em pdf em imagem png. A API faz o reconhecimento do arquivo, extrai os dados usando o Tesseract.js  e estrutura os dados usando a GPT-4 Turbo, a aplicação é responsavél por toda lógica de validação.
+
+- **POST /nif/show**:
+    Extrai os dados de um documento de Identificação Fiscal.  A API faz o reconhecimento do arquivo, extrai os dados  e estrutura os dados usando a GPT-4.
 
 ## Começando
 
@@ -92,7 +100,6 @@ Acesse a documentação oficial da API, incluindo exemplos detalhados de como ut
 
 ## Roteiro de Desenvolvimento
 
-- **Validação do Bilhete de Identidade (BI)**: Em desenvolvimento.
 - **Validação de Outros Documentos**: Expansão para faturas de serviços, contratos, e outros documentos relevantes.
 - **Suporte a OCR**: Planejado para PDFs baseados em imagem (Já implementado).
 - **Converter arquivos scaneados em imagem** : para facilitar a extração de dados ( já implementado)
