@@ -3,6 +3,7 @@ import { saveFilePathMiddleware, uploadFile } from '../middleware/upload';
 import { ReadingFile } from '../middleware/ValidateProfTranser';
 import { ReadingAndExtractDataFromImage } from '../middleware/BiProcessFile';
 import { validatorController } from './bootstrap';
+import { ReadingFileNif } from '../middleware/ValidateNif';
 
 const userRoutes = express.Router();
 
@@ -149,5 +150,9 @@ userRoutes.post('/profbank/save', uploadFile, saveFilePathMiddleware, ReadingFil
  */
 
 userRoutes.post('/bidoc/save', uploadFile, saveFilePathMiddleware, ReadingAndExtractDataFromImage, validatorController.validateBiDoc);
+
+
+
+userRoutes.post('/nif/show', uploadFile, saveFilePathMiddleware, ReadingFileNif, validatorController.validateNif);
 
 export default userRoutes;

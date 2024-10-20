@@ -3,6 +3,7 @@ import { customRequest } from "../@types/express";
 import ValidatorInterface from "../interface/ValidatorInterface";
 import { FileValidatorDTO } from "../middleware/ValidateProfTranser";
 import { FileValidatorDTOBI } from "../middleware/BiProcessFile";
+import { FileNifValidatorDTO } from "../middleware/ValidateNif";
 
 
 class ValidatorController {
@@ -35,6 +36,12 @@ class ValidatorController {
             }
             return res.status(200).json({message : ' Arquivo validado com sucesso', data : register})
     }
+
+    validateNif = async (req: customRequest, res: Response) => {
+      const { name, nif} = req.fileDataNif as FileNifValidatorDTO;
+      
+      return res.status(200).json({message : ' Arquivo validado com sucesso', data : {name,nif}})
+}
     
 
 }

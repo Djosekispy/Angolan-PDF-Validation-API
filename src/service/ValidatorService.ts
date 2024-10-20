@@ -1,5 +1,6 @@
 import ValidatorInterface from "../interface/ValidatorInterface";
 import { FileValidatorDTOBI } from "../middleware/BiProcessFile";
+import { FileNifValidatorDTO } from "../middleware/ValidateNif";
 import { FileValidatorDTO } from "../middleware/ValidateProfTranser";
 import { ITrasaction, Transaction } from "../Model/Transaction";
 import { User } from "../Model/User";
@@ -51,6 +52,7 @@ class ValidatorService implements ValidatorInterface {
       return { error: 'Erro ao salvar o usuário: ' + error };
     }
   }
+ 
 }
 
 export default ValidatorService;
