@@ -20,6 +20,10 @@ Esta API está sendo desenvolvida para validar documentos em formato PDF normal 
    - Extrai os dados e retorna eles de forma estruturada
    - Aceita apenas documento não scaneado ( Foi testado com documentos gerado pelo SEPE )
 
+- **Consulta de NIF**:
+  - Realiza a consulta do NIF (Número de Identificação Fiscal) de um indivíduo.
+  - Retorna os dados do contribuinte, incluindo o nome, data de nascimento e endereço, se encontrados.
+
 ### Uso da API GPT-4 Turbo
 
 A API utiliza a **GPT-4 Turbo** para realizar a extração e estruturação dos dados dos documentos PDF. A GPT-4 Turbo é responsável por interpretar o conteúdo dos documentos e retornar informações organizadas no formato JSON, facilitando a validação dos dados.
@@ -49,6 +53,7 @@ A API utiliza a **GPT-4 Turbo** para realizar a extração e estruturação dos 
 
 - **POST /nif/show**:
     Extrai os dados de um documento de Identificação Fiscal.  A API faz o reconhecimento do arquivo, extrai os dados  e estrutura os dados usando a GPT-4.
+
 
 ## Começando
 
