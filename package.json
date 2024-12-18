@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
    "dev": "nodemon ./api/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vercel-build" : "npx puppeteer install"
   },
   "keywords": [],
   "author": "",
