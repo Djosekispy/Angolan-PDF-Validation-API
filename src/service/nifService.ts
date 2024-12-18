@@ -2,26 +2,27 @@ import puppeteer from 'puppeteer';
 import { Nif } from '../Model/nif';
 
 export async function consultarNif(nif: string): Promise<Nif> {
-  try {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: true, args: ['--disable-dev-shm-usage', '--no-sandbox'], });
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    page.on('request', (request) => {
+        const resourceType = request.resourceType();
+        if (['image', 'stylesheet', 'font'].includes(resourceType)) {
+          request.abort();
+        } else {
+          request.continue();
+        }
+      });
+  try {
+    
     await page.goto('https://portaldocontribuinte.minfin.gov.ao/consultar-nif-do-contribuinte', {
-        timeout: 60000, // 60 segundos
+        timeout: 60000, 
         waitUntil: 'domcontentloaded',
       });
-    // Aguarde o carregamento completo da página
     await page.waitForSelector('input[id="j_id_2x:txtNIFNumber"]');
-
-    // Insira o NIF no campo de entrada
     await page.type('input[id="j_id_2x:txtNIFNumber"]', nif);
-
-    // Clique no botão de pesquisar
     await page.click('button[id="j_id_2x:j_id_34"]');
-
-    // Aguarde a resposta ser renderizada
     await page.waitForSelector('div.panel-default-header');
-
-    // Extraia os dados da resposta
     const resultado = await page.evaluate(() => {
         const getText = (labelSelector: string): string => {
           const labelElement = document.querySelector(labelSelector);
@@ -47,3 +48,5 @@ export async function consultarNif(nif: string): Promise<Nif> {
     throw new Error('Erro ao consultar o NIF.');
   }
 }
+
+
