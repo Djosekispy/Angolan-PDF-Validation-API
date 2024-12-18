@@ -195,4 +195,51 @@ userRoutes.post('/bidoc/save', uploadFile, saveFilePathMiddleware, ReadingAndExt
 userRoutes.post('/nif/show', uploadFile, saveFilePathMiddleware,validatorController.validateNif);
 
 
+/**
+ * @swagger
+ * /nif/show:
+ *   get:
+ *     summary: Consulta um documento de NIF
+ *     description: Consulta os dados de um NIF.
+ *     tags:
+ *       - NIF
+ *     parameters:
+ *       - in: query
+ *         name: nif
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Dados do NIF consultados com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 nif:
+ *                   type: string
+ *                   example: "XXXXXXXXXXXX"
+ *                 nome:
+ *                   type: string
+ *                   example: "XXXXXXXXXXX"
+ *                 tipo:
+ *                   type: string
+ *                   example: "XXXXXXXXXXX"
+ *                 estado:
+ *                   type: string
+ *                   example: "XXXXXXXXXXX"
+ *                 regimeIva:
+ *                   type: string
+ *                   example: "XXXXXXXXXXX"
+ *                 residenciaFiscal:
+ *                   type: string
+ *                   example: "XXXXXXXXXXX"
+ *       400:
+ *         description: Erro interno do servidor
+ */
+
+userRoutes.get('/consultar-nif/:nif', validatorController.consultNif);
+
+
 export default userRoutes;

@@ -3,6 +3,7 @@ import { customRequest } from "../@types/express";
 import ValidatorInterface from "../interface/ValidatorInterface";
 import { FileValidatorDTOBI } from "../middleware/BiProcessFile";
 import { ExtractFile } from "../utils/extractdata";
+import { getNifData } from "../repository/nifRepository";
 
 
 class ValidatorController {
@@ -42,7 +43,17 @@ class ValidatorController {
       const { name, nif} = await ExtractFile(req.downloadURL as string,question);
       return res.status(200).json({message : ' Arquivo validado com sucesso', data : {name,nif}})
 }
-    
+
+ consultNif = async(req: Request, res: Response) => {
+  const { nif } = req.params;
+  try {
+    const nifData = await getNifData(nif);
+    res.status(200).json(nifData);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao consultar o NIF.' });
+  }
+}
+
 
 }
 
